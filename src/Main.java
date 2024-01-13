@@ -17,12 +17,20 @@ public class Main {
             }
         });
 
-        counter.addListener(CounterEvent.COUNTER_CHANGE, new IListener() {
+        /*counter.addListener(CounterEvent.COUNTER_CHANGE, new IListener() {
             @Override
             public void update(Event event) {
                 var c = (Counter) event.getSender();
                 System.out.println(event.getType() + " count: " + c.getCount() + " name: " + ((CounterEvent) event).getName());
             }
+        });*/
+
+
+        // as lambda expression
+        counter.addListener(CounterEvent.COUNTER_CHANGE, (Event event) -> {
+            var counterEvent = (CounterEvent) event;
+            var c = (Counter) counterEvent.getSender();
+            System.out.println(counterEvent.getType() + " count: " + c.getCount() + " name: " + counterEvent.getName());
         });
 
         counter.addListener(CounterEvent.COUNTER_FINISH, new IListener() {
@@ -34,9 +42,14 @@ public class Main {
             }
         });
 
+
+
         // counter.removeListener(CounterEvent.COUNTER_CHANGE);
 
 
         counter.run();
+
+
+
     }
 }
